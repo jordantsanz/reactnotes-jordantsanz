@@ -1,0 +1,16 @@
+{
+  "name": "starterpack-jordantsanz",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/dartmouth-cs52-20X/starterpack-jordantsanz.git",
+  "author": "jordantsanz <jordan.t.sanz.22@dartmouth.edu>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
