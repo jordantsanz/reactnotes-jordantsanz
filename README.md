@@ -1,4 +1,4 @@
-# Title
+# Starter Site Short Assignment
 
 *This is the repo for my starter website that uses a webpack configuration!*
 
