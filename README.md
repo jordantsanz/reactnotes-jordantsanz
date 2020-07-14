@@ -11,4 +11,4 @@ It was really easy to add loaders to the webconfig file, which is super nice to 
 It was difficult to install yarn at first for ubuntu on windows, but after snooping around some github solutions, I figured it out.
 
 ## Screenshots
-[final site](src/img/screenshot.jpg)
+![final site](src/img/screenshot.jpg)
