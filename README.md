@@ -2,7 +2,7 @@
 
 *This is the repo for my starter website that uses a webpack configuration!*
 
-[starter site](http://jordantsanz-cs52-starter.surge.sh/)
+[Starter Site](http://jordantsanz-cs52-starter.surge.sh/)
 
 ## What Worked Well
 It was really easy to add loaders to the webconfig file, which is super nice to know. 
@@ -11,4 +11,4 @@ It was really easy to add loaders to the webconfig file, which is super nice to 
 It was difficult to install yarn at first for ubuntu on windows, but after snooping around some github solutions, I figured it out.
 
 ## Screenshots
-![final site](http://github.com/dartmouth-cs52-20X/starterpack-jordantsanz/src/img/screenshot.jpg)
+![final site](https://github.com/dartmouth-cs52-20X/starterpack-jordantsanz/blob/master/src/img/screenshot.JPG)
