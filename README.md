@@ -17,7 +17,6 @@ It was really difficult to understand the syntax of React at first. Conceptually
 * Rotate button: click on the star on a note, and the entire note rotates and changes color in a fun animation
 * Realtime Editing: the edits occur in real-time!
 * General styling: I really enjoy this part, probably not extra credit but I have fun doing this
-* Markdown support: there's markdown on the body of text which is fun
 * Textboxes auto-grow on typing
 
 ## Screenshots
@@ -25,7 +24,7 @@ Couldn't figure out how to screen record multiple browsers, but tried my best to
 
 
 ![](zIndex-autotextbox.gif)
-*Here's an example of my z-index working and my autotextbox working. The gif that's on there is through markdown! *
+*Here's an example of my z-index working and my autotextbox working.*
 
 
 ![](undo-rotate-newnote.gif)
