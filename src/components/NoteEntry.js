@@ -7,14 +7,12 @@ class NoteEntry extends Component {
     super(props);
 
     this.state = {
-      id: 0,
       note: {
         title: '',
-        text: '',
+        text: '(click here to type)',
         x: 0,
         y: 0,
         zIndex: 1,
-        id: '',
         color: 'note-pink',
       },
       colorBox: {
@@ -40,14 +38,13 @@ class NoteEntry extends Component {
 
   // creates the note
   createNote() {
-    const counter = this.state.id + 1;
     const note = { ...this.state.note };
     const zIndexCounter = note.zIndex + 1;
     note.zIndex = zIndexCounter;
     this.setState((prevState) => ({
-      id: counter,
+      note,
     }));
-    this.props.createNote(this.state.id, this.state.note);
+    this.props.createNote(this.state.note);
 
     note.title = '';
     this.setState((prevState) => ({

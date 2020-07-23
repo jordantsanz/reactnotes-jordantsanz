@@ -12,10 +12,6 @@ class Note extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '(click here to type)',
-      // eslint-disable-next-line react/no-unused-state
-      title: this.props.note.title,
-      id: this.props.id,
       isUpdating: false,
       isUpdatingTitle: false,
     };
@@ -26,11 +22,19 @@ class Note extends Component {
   }
 
   onInputChange(event) {
-    this.setState({ text: event.target.value });
+    const field = {
+      text: event.target.value,
+    };
+
+    this.props.updateNote(this.props.id, field);
   }
 
   onInputChangeTitle = (event) => {
-    this.setState({ title: event.target.value });
+    const field = {
+      title: event.target.value,
+    };
+
+    this.props.updateNote(this.props.id, field);
   }
 
   onStart = (event, data) => {
@@ -47,16 +51,23 @@ class Note extends Component {
   }
 
   deleteNote() {
-    this.props.deleteNote(this.state.id);
+    this.props.deleteNote(this.props.id);
   }
 
   updateNote() {
-    this.state.isUpdating = true;
-    this.state.isUpdatingTitle = true;
-    this.props.updateNote(this.state.id, this.state.text);
+    this.setState({
+      isUpdating: true,
+      isUpdatingTitle: true,
+    });
   }
 
   finishedUpdating() {
+    const field = {
+      title: this.props.note.title,
+      text: this.props.note.text,
+    };
+
+    this.props.updateNote(this.props.id, field);
     this.setState({
       isUpdating: false,
       isUpdatingTitle: false,
@@ -67,15 +78,23 @@ class Note extends Component {
     if (this.state.isUpdating) {
       return (
         <div className="bottom-note">
-          <TextareaAutosize minRows={3} maxRows={6} className="inputTextbox" value={this.state.text} onChange={this.onInputChange} />
-          <FontAwesomeIcon icon={faCheck} className="icon" id="check" onClick={this.finishedUpdating} />
+          <TextareaAutosize minRows={3} maxRows={6} className="inputTextbox" value={this.props.note.text} onChange={this.onInputChange} />
         </div>
       );
     } else {
       return (
         <div>
-          <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.state.text || '') }} />
+          <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
         </div>
+      );
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  renderCheckbox() {
+    if (this.state.isUpdating) {
+      return (
+        <FontAwesomeIcon icon={faCheck} className="icon" id="check" onClick={this.finishedUpdating} />
       );
     }
   }
@@ -84,12 +103,12 @@ class Note extends Component {
     if (this.state.isUpdatingTitle) {
       return (
         <div>
-          <TextareaAutosize minRows={2} className="inputTextbox" id="title" value={this.state.title} onChange={this.onInputChangeTitle} />
+          <TextareaAutosize minRows={2} className="inputTextbox" id="title" value={this.props.note.title} onChange={this.onInputChangeTitle} />
         </div>
       );
     } else {
       return (
-        <h1 className="noteTitle"> {this.state.title} </h1>
+        <h1 className="noteTitle"> {this.props.note.title} </h1>
       );
     }
   }
@@ -108,13 +127,14 @@ class Note extends Component {
         }}
 
       >
-        <div className={this.props.note.color} id={this.props.note.id} style={{ zIndex: this.props.note.zIndex }}>
+        <div className={this.props.note.color} id={this.props.id} style={{ zIndex: this.props.note.zIndex }}>
           <div className="note-top-row">
             <FontAwesomeIcon icon={faTrash} className="icon" id="trash" onClick={this.deleteNote} />
             <FontAwesomeIcon icon={faArrowsAlt} className="arrowsIcon" id="arrows" />
             <div className="textbox" id="title-textbox" onClick={this.updateNote}>{this.renderUpdateTitle()}</div>
           </div>
           <div className="textbox" id="main-text" onClick={this.updateNote}>{this.renderUpdate()}</div>
+          {this.renderCheckbox()}
         </div>
       </Draggable>
 
