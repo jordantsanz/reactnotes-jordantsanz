@@ -5,7 +5,9 @@ import Draggable from 'react-draggable';
 import marked from 'marked';
 import TextareaAutosize from 'react-textarea-autosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faArrowsAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash, faArrowsAlt, faCheck, faStar,
+} from '@fortawesome/free-solid-svg-icons';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Note extends Component {
@@ -19,6 +21,8 @@ class Note extends Component {
     this.updateNote = this.updateNote.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.finishedUpdating = this.finishedUpdating.bind(this);
+    this.rotateAnimation = this.rotateAnimation.bind(this);
+    this.finishedAnimation = this.finishedAnimation.bind(this);
   }
 
   onInputChange(event) {
@@ -50,15 +54,29 @@ class Note extends Component {
     this.props.updateNote(this.props.id, fields);
   }
 
-  deleteNote() {
-    this.props.deleteNote(this.props.id);
-  }
-
   updateNote() {
     this.setState({
       isUpdating: true,
       isUpdatingTitle: true,
     });
+  }
+
+  deleteNote() {
+    this.props.deleteNote(this.props.id, this.props.note);
+  }
+
+  rotateAnimation() {
+    const field = {
+      color: 'note-fun',
+    };
+    this.props.updateNote(this.props.id, field);
+  }
+
+  finishedAnimation() {
+    const field = {
+      color: this.props.note.oldField,
+    };
+    this.props.updateNote(this.props.id, field);
   }
 
   finishedUpdating() {
@@ -127,8 +145,9 @@ class Note extends Component {
         }}
 
       >
-        <div className={this.props.note.color} id={this.props.id} style={{ zIndex: this.props.note.zIndex }}>
+        <div onAnimationEnd={this.finishedAnimation} className={this.props.note.color} id={this.props.id} style={{ zIndex: this.props.note.zIndex }}>
           <div className="note-top-row">
+            <FontAwesomeIcon icon={faStar} className="icon" id="star" onClick={this.rotateAnimation} />
             <FontAwesomeIcon icon={faTrash} className="icon" id="trash" onClick={this.deleteNote} />
             <FontAwesomeIcon icon={faArrowsAlt} className="arrowsIcon" id="arrows" />
             <div className="textbox" id="title-textbox" onClick={this.updateNote}>{this.renderUpdateTitle()}</div>

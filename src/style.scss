@@ -41,7 +41,7 @@ body, html {
   margin-right: 40px;
 }
 
-.note-pink, .note-red, .note-orange, .note-green, .note-purple{
+.note-pink, .note-red, .note-orange, .note-green, .note-purple, .note-fun{
   border: white solid 4px;
   display: flex;
   justify-content: space-between;
@@ -89,6 +89,41 @@ body, html {
 
 .note-purple, #purple{
   background-color: rgb(203, 86, 233);
+}
+
+.note-fun{
+  animation: fun;
+  animation-duration: .7s;
+  animation-iteration-count: 1;
+  transition: .7 all ease;
+  background-color: rgb(238, 171, 171);
+}
+
+@keyframes fun{
+  0%{
+    transform: rotateZ(60deg);
+    background-color: white;
+  }
+  20%{
+    transform: rotateZ(120deg);
+    background-color: rgb(238, 171, 171);
+  }
+  40%{
+    transform: rotateZ(180deg);
+    background-color: rgb(109, 209, 109);
+  }
+  60%{
+    transform: rotateZ(240deg);
+    background-color: rgb(250, 134, 40);
+  }
+  80%{
+    transform: rotateZ(300deg);
+    background-color: rgb(203, 86, 233);
+  }
+  100%{
+    transform: rotateZ(360deg);
+    background-color: rgb(243, 74, 74);
+  }
 }
 
 .textbox{
@@ -183,7 +218,7 @@ button{
   width: 100%;
 }
 
-#trash, #arrows, #check{
+#trash, #arrows, #check, #undo, #star{
   margin-right: 9px;
   width: 30px;
   height: 30px;
@@ -193,10 +228,10 @@ button{
 
 }
 
-#check.icon{
+#check.icon, #undo.icon{
   height: 50px;
   width: 50px;
-  transition: 400ms transform ease;
+  transition: 400ms transform ease, all 400ms ease;
 }
 
 #check.icon:hover{
@@ -205,7 +240,49 @@ button{
   transform: rotateZ(360deg);
 }
 
-#trash:hover, #arrows:hover, #check:hover{
+#undo.icon{
+  height: 55px;
+  width: 55px;
+}
+
+#undo.icon:hover{
+  transform:  rotateZ(360deg);
+  color: black;
+  cursor: pointer;
+}
+
+#star.icon:hover{
+  animation-name: rainbow;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow{
+  0%{
+    color: red;
+  }
+  20%{
+    color: orange;
+  }
+  40%{
+    color: green;
+  }
+  60%{
+    color: blue;
+  }
+  80%{
+    color: pink;
+  }
+  95%{
+    color: white;
+  }
+  100%{
+    color: black;
+  }
+
+}
+
+#trash:hover, #arrows:hover, #check:hover, #star:hover{
   width: 35px;
   height: 35px;
   cursor: pointer;

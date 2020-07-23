@@ -1,6 +1,8 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 
 class NoteEntry extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class NoteEntry extends Component {
         y: 0,
         zIndex: 1,
         color: 'note-pink',
+        oldField: 'note-pink',
       },
       colorBox: {
         red: 'color-box',
@@ -26,6 +29,7 @@ class NoteEntry extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.createNote = this.createNote.bind(this);
     this.changeColor = this.changeColor.bind(this);
+    this.undoNote = this.undoNote.bind(this);
   }
 
   // on change of input in searchbar note entry component
@@ -125,10 +129,15 @@ class NoteEntry extends Component {
     }
     const note = { ...this.state.note };
     note.color = newColor;
+    note.oldField = newColor;
     this.setState((prevState) => ({
       // eslint-disable-next-line react/no-unused-state
       note,
     }));
+  }
+
+  undoNote() {
+    this.props.undoNote();
   }
 
   render() {
@@ -145,6 +154,7 @@ class NoteEntry extends Component {
             <div className={this.state.colorBox.pink} id="pink" onClick={() => this.changeColor('pink')} />
           </div>
         </div>
+        <FontAwesomeIcon icon={faUndo} className="icon" id="undo" onClick={this.undoNote} />
       </div>
     );
   }

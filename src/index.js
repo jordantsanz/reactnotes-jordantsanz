@@ -14,12 +14,15 @@ class App extends Component {
     super(props);
     this.state = {
       notes: Map(),
+      deletedNote: null,
+      deletedId: null,
     };
     this.createNote = this.createNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
     this.updateNoteZindex = this.updateNoteZindex.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.undoNote = this.undoNote.bind(this);
   }
 
   componentDidMount() {
@@ -33,8 +36,21 @@ class App extends Component {
   }
 
   // deletes the note
-  deleteNote(id) {
+  deleteNote(id, incomingNote) {
+    this.setState({
+      deletedNote: incomingNote,
+      deletedId: id,
+    });
     db.fbdeleteNote(id);
+  }
+
+  undoNote() {
+    if (this.state.deletedNote != null && this.state.deletedNote !== '') {
+      db.fbupdateNotes(this.state.deletedId, this.state.deletedNote);
+      this.setState({
+        deletedNote: '',
+      });
+    }
   }
 
   // updates text field on note
@@ -57,14 +73,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <NoteEntry createNote={this.createNote} />
+      <div className="main-flexbox">
+        <NoteEntry createNote={this.createNote} undoNote={this.undoNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
             <Note id={id} note={note} key={id} deleteNote={this.deleteNote} updateNote={this.updateNote} updateNoteZindex={this.updateNoteZindex}> </Note>
           );
         })}
-        <div>{this.state.test} </div>
       </div>
     );
   }
