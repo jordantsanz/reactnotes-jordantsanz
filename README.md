@@ -1,6 +1,6 @@
-# Lab 3: React Notes
+# React Notes
 
-*This is my react notes website for Lab 3! Enjoy chatting with friends in real-time by posting notes. This was made by using React with a web-package.*
+*This is my react notes website for Lab 3 in CS 52! Enjoy chatting with friends in real-time by posting notes. This was made by using React with a web-package.*
 
 [React Notes Website](http://jordantsanz-cs52-reactnotes.surge.sh/)
 
